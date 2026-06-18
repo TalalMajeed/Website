@@ -32,7 +32,7 @@ export function Newsletter() {
         shipped, learned, or broken. No marketing.
       </p>
       <form
-        className="newsletter-form flex max-w-[380px] overflow-hidden rounded-full border border-[var(--line)] bg-[var(--ink)] transition-colors focus-within:border-[var(--accent)]"
+        className="newsletter-form flex max-w-[380px] overflow-hidden border border-[var(--line)] bg-[var(--ink)] transition-colors focus-within:border-[var(--accent)]"
         onSubmit={handleSubmit}
       >
         <input

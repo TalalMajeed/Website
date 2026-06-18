@@ -77,23 +77,78 @@ export function Cursor() {
     const contributionCells: HTMLDivElement[] = [];
 
     if (graph && !graph.hasChildNodes()) {
+      const year = 2025;
+      const start = new Date(year, 0, 1);
+      const end = new Date(year, 11, 31);
+      const gridStart = new Date(start);
+      gridStart.setDate(start.getDate() - start.getDay());
+      const monthLabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const randomForDate = (date: Date) => {
+        const value = date.getFullYear() * 10000 + (date.getMonth() + 1) * 100 + date.getDate();
+        const hashed = Math.sin(value * 12.9898 + 78.233) * 43758.5453;
+
+        return hashed - Math.floor(hashed);
+      };
+      const monthPositions = monthLabels.map((label, month) => {
+        const date = new Date(year, month, 1);
+        const week = Math.floor((date.getTime() - gridStart.getTime()) / (7 * 24 * 60 * 60 * 1000));
+
+        return { label, week };
+      });
+      const monthRow = document.createElement("div");
+      monthRow.className = "contrib-months";
+      const weekdayColumn = document.createElement("div");
+      weekdayColumn.className = "contrib-month-spacer";
+      monthRow.appendChild(weekdayColumn);
+
+      monthPositions.forEach(({ label, week }) => {
+        const month = document.createElement("span");
+        month.className = "contrib-month";
+        month.style.gridColumn = `${week + 2} / span 4`;
+        month.textContent = label;
+        monthRow.appendChild(month);
+      });
+
+      const body = document.createElement("div");
+      body.className = "contrib-body";
+      const weekdays = document.createElement("div");
+      weekdays.className = "contrib-weekdays";
+      ["", "Mon", "", "Wed", "", "Fri", ""].forEach((label) => {
+        const weekday = document.createElement("span");
+        weekday.textContent = label;
+        weekdays.appendChild(weekday);
+      });
+      body.appendChild(weekdays);
+
+      const weeks = document.createElement("div");
+      weeks.className = "contrib-weeks";
+
       for (let week = 0; week < 53; week += 1) {
         const col = document.createElement("div");
         col.className = "contrib-col";
 
         for (let day = 0; day < 7; day += 1) {
           const cell = document.createElement("div");
+          const date = new Date(gridStart);
+          date.setDate(gridStart.getDate() + week * 7 + day);
+          const isInYear = date >= start && date <= end;
           const isWeekend = day === 0 || day === 6;
-          const seed = (week * 17 + day * 29 + 13) % 100;
+          const seed = randomForDate(date);
           let level = 0;
 
-          if (seed >= (isWeekend ? 45 : 18) && seed < (isWeekend ? 70 : 40)) {
+          if (!isInYear) {
+            cell.className = "contrib-cell contrib-cell-empty";
+            col.appendChild(cell);
+            continue;
+          }
+
+          if (seed >= (isWeekend ? 0.38 : 0.16) && seed < (isWeekend ? 0.58 : 0.38)) {
             level = 1;
-          } else if (seed >= (isWeekend ? 70 : 40) && seed < (isWeekend ? 88 : 70)) {
+          } else if (seed >= (isWeekend ? 0.58 : 0.38) && seed < (isWeekend ? 0.78 : 0.66)) {
             level = 2;
-          } else if (seed >= (isWeekend ? 88 : 70) && seed < 92) {
+          } else if (seed >= (isWeekend ? 0.78 : 0.66) && seed < 0.9) {
             level = 3;
-          } else if (seed >= 92) {
+          } else if (seed >= 0.9) {
             level = 4;
           }
 
@@ -103,8 +158,12 @@ export function Cursor() {
           contributionCells.push(cell);
         }
 
-        graph.appendChild(col);
+        weeks.appendChild(col);
       }
+
+      body.appendChild(weeks);
+      graph.appendChild(monthRow);
+      graph.appendChild(body);
     }
 
     const graphObserver = new IntersectionObserver(

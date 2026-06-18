@@ -28,12 +28,8 @@ export function Footer() {
             </span>
             <p className="footer-tagline mb-7 max-w-80 text-sm leading-relaxed text-[var(--muted)]">
               Software & AI engineer. Building thoughtful systems from Islamabad
-              — quietly, deliberately, on time.
+              - quietly, deliberately, on time.
             </p>
-            <div className="footer-status inline-flex items-center gap-2.5 rounded-full border border-[rgb(74_222_128_/_25%)] bg-[rgb(74_222_128_/_8%)] px-3.5 py-2 [font-family:var(--mono)] text-xs text-[var(--text)]">
-              <span className="status-dot size-2 rounded-full bg-[var(--green)] shadow-[0_0_8px_var(--green)]" />
-              Open to opportunities
-            </div>
           </div>
 
           <div className="footer-col">
@@ -77,7 +73,7 @@ export function Footer() {
           <div>© 2026 Talal Majeed · All systems nominal.</div>
           <div className="footer-meta flex flex-wrap gap-6">
             <span>33.7°N · 73.1°E</span>
-            <span>Crafted by hand · Built in Islamabad</span>
+            <span>Built in Islamabad</span>
             <span>v.2026.06</span>
           </div>
         </div>

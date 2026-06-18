@@ -132,15 +132,6 @@ const cases = [
   },
 ];
 
-const commits = [
-  ["a3f24b1", "aks-prod", "feat: tuned HPA thresholds for off-peak hours", "2 hours ago"],
-  ["8e1c7d2", "goodsales", "fix: handle null lead enrichment on first-time signup", "5 hours ago"],
-  ["f5b9034", "aks-prod", "chore: bump prometheus to 2.51, tighten scrape interval", "yesterday"],
-  ["2d0a8f6", "goodsales", "refactor: move enrichment pipeline to Cloud Run jobs", "2 days ago"],
-  ["b71e4c9", "portfolio", "feat: rebuilt experience timeline with wired nodes", "3 days ago"],
-  ["19fa5e2", "aks-prod", "docs: written runbook for spine-line node failure", "4 days ago"],
-];
-
 const sectionBase =
   "relative mx-auto max-w-[var(--maxw)] px-[var(--gutter)] py-[clamp(80px,12vh,140px)]";
 const coordClass =
@@ -167,22 +158,23 @@ export default function Home() {
           <div className="hero-meta-item flex items-center gap-2">v.2026.06</div>
         </div>
 
-        <h1 className="hero-headline mb-[30px] [font-family:var(--display)] text-[clamp(56px,13vw,200px)] font-medium leading-[0.92] tracking-[-0.05em]">
+        <h1 className="hero-headline mb-6 [font-family:var(--display)] text-[clamp(50px,9.6vw,146px)] font-medium leading-[0.9] tracking-[-0.05em]">
           <span className="line">
             <span className="line-inner">
-              Talal <span className="accent">Majeed</span>
+              <span className="accent">M.</span>Talal{" "}
+              <span className="accent">Majeed</span>
             </span>
           </span>
-          <span className="line">
+          <span className="line -mt-[0.16em] leading-[0.68]">
             <span className="line-inner">
-              <span className="quiet font-light text-[var(--muted)]">
+              <span className="quiet text-[0.62em] font-light leading-[0.95] text-[var(--muted)]">
                 Software Developer
               </span>
             </span>
           </span>
         </h1>
 
-        <p className="hero-sub mb-[50px] max-w-[580px] text-[clamp(16px,1.8vw,20px)] leading-[1.55] text-[var(--muted)] [&_strong]:font-medium [&_strong]:text-[var(--text)]">
+        <p className="hero-sub mb-10 max-w-[540px] text-[clamp(15px,1.35vw,18px)] leading-[1.5] text-[var(--muted)] [&_strong]:font-medium [&_strong]:text-[var(--text)]">
           Software & AI engineer working across <strong>cloud infrastructure</strong>,{" "}
           <strong>intelligent agents</strong>, and{" "}
           <strong>full-stack platforms</strong>. Currently shipping production
@@ -282,7 +274,7 @@ export default function Home() {
             <div className={`skills-track ${index === 1 ? "reverse fast" : ""}`}>
               {[...row, ...row].map(([skill, extra], skillIndex) => (
                 <div
-                  className={`skill rounded-full border px-[22px] py-3.5 [font-family:var(--mono)] text-sm tracking-[0.01em] transition-all duration-300 ${
+                  className={`skill border px-[22px] py-3.5 [font-family:var(--mono)] text-sm tracking-[0.01em] transition-all duration-300 ${
                     extra === "featured"
                       ? "border-[var(--accent)] bg-[var(--accent)] font-medium text-[var(--ink)]"
                       : extra === "outline-gold"
@@ -323,7 +315,7 @@ export default function Home() {
           <div className="exp-cards relative z-[2] flex flex-col gap-[60px] max-[880px]:gap-10">
             {experiences.map((item) => (
               <div
-                className={`exp-card ${item.align} w-[calc(50%-50px)] rounded-[14px] border border-[var(--line)] bg-[var(--surface)] px-[30px] py-7 transition-all duration-500 hover:-translate-y-1 hover:border-[var(--accent)] hover:shadow-[0_20px_50px_-20px_rgb(255_84_54_/_25%)] max-[880px]:w-[calc(100%-60px)] max-[880px]:self-end max-[880px]:px-[22px] max-[880px]:py-6`}
+                className={`exp-card ${item.align} w-[calc(50%-50px)] border border-[var(--line)] bg-[var(--surface)] px-[30px] py-7 transition-all duration-500 hover:-translate-y-1 hover:border-[var(--accent)] hover:shadow-[0_20px_50px_-20px_rgb(255_84_54_/_25%)] max-[880px]:w-[calc(100%-60px)] max-[880px]:self-end max-[880px]:px-[22px] max-[880px]:py-6`}
                 data-link
                 key={item.role}
               >
@@ -357,7 +349,7 @@ export default function Home() {
                 <div className="exp-stack flex flex-wrap gap-1.5 border-t border-[var(--line)] pt-[18px]">
                   {item.stack.map((tech) => (
                     <span
-                      className="rounded border border-[var(--line)] px-2.5 py-1 [font-family:var(--mono)] text-[10.5px] tracking-[0.04em] text-[var(--muted)]"
+                      className="border border-[var(--line)] px-2.5 py-1 [font-family:var(--mono)] text-[10.5px] tracking-[0.04em] text-[var(--muted)]"
                       key={tech}
                     >
                       {tech}
@@ -382,24 +374,26 @@ export default function Home() {
         <div className="case-grid grid grid-cols-6 gap-6">
           {cases.map((item) => (
             <article
-              className={`case reveal ${item.delay} relative col-span-3 flex min-h-[420px] flex-col overflow-hidden rounded-lg border border-[var(--line)] bg-[var(--ink-2)] p-9 transition-all duration-500 first:col-span-6 first:min-h-[380px] hover:-translate-y-1.5 hover:border-[var(--accent)] max-[880px]:col-span-6 max-[880px]:min-h-80 max-[880px]:p-7`}
+              className={`case reveal ${item.delay} relative col-span-3 flex min-h-[420px] flex-col overflow-hidden border border-[var(--line)] bg-[var(--ink-2)] p-9 transition-all duration-500 first:col-span-6 first:min-h-[380px] hover:-translate-y-1.5 hover:border-[var(--accent)] max-[880px]:col-span-6 max-[880px]:min-h-80 max-[880px]:p-7`}
               data-link
               key={item.num}
             >
-              <div className="case-glyph absolute right-9 top-9 text-right [font-family:var(--mono)] text-[10px] leading-relaxed tracking-[0.1em] text-[var(--muted-2)] opacity-70">
-                {item.glyph.split("\n").map((line) => (
-                  <span key={line}>
-                    {line}
-                    <br />
-                  </span>
-                ))}
-              </div>
+              {!item.status ? (
+                <div className="case-glyph absolute right-9 top-9 text-right [font-family:var(--mono)] text-[10px] leading-relaxed tracking-[0.1em] text-[var(--muted-2)] opacity-70">
+                  {item.glyph.split("\n").map((line) => (
+                    <span key={line}>
+                      {line}
+                      <br />
+                    </span>
+                  ))}
+                </div>
+              ) : null}
               <div className="case-head mb-6 flex items-start justify-between">
                 <div className="case-num [font-family:var(--mono)] text-[11px] tracking-[0.1em] text-[var(--muted)]">
                   {item.num}
                 </div>
                 {item.status ? (
-                  <div className="case-status shipped rounded-full border border-[rgb(232_199_122_/_30%)] bg-[rgb(232_199_122_/_10%)] px-2.5 py-1 [font-family:var(--mono)] text-[10px] uppercase tracking-[0.1em] text-[var(--gold)]">
+                  <div className="case-status shipped border border-[rgb(232_199_122_/_30%)] bg-[rgb(232_199_122_/_10%)] px-2.5 py-1 [font-family:var(--mono)] text-[10px] uppercase tracking-[0.1em] text-[var(--gold)]">
                     {item.status}
                   </div>
                 ) : null}
@@ -441,24 +435,17 @@ export default function Home() {
 
         <div className="activity-meta reveal mb-10 flex flex-wrap gap-8 [font-family:var(--mono)] text-xs tracking-[0.04em] text-[var(--muted)] [&_strong]:font-medium [&_strong]:text-[var(--text)]">
           <span>
-            <span className="accent-num font-semibold text-[var(--accent)]">1,247</span> contributions in the last
-            year
-          </span>
-          <span>
-            Current streak: <strong>23 days</strong>
-          </span>
-          <span>
-            Longest streak: <strong>47 days</strong>
+            <span className="accent-num font-semibold text-[var(--accent)]">1994</span> Contributions
           </span>
         </div>
 
-        <div className="contrib-card reveal delay-1 overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--ink-2)] p-8 max-[640px]:p-5">
+        <div className="contrib-card reveal delay-1 overflow-hidden border border-[var(--line)] bg-[var(--ink-2)] p-8 max-[640px]:p-5">
           <div className="contrib-card-head mb-7 flex flex-wrap items-center justify-between gap-4">
             <div className="label [font-family:var(--mono)] text-[11px] uppercase tracking-[0.1em] text-[var(--muted)]">
               <span className="accent-text text-[var(--accent)]">@TalalMajeed</span> · github.com
             </div>
             <div className="label [font-family:var(--mono)] text-[11px] uppercase tracking-[0.1em] text-[var(--muted)]">
-              JUN 2025 → JUN 2026
+              JAN 2025 → DEC 2025
             </div>
           </div>
           <div className="contrib-graph-wrap overflow-x-auto pb-2">
@@ -473,32 +460,6 @@ export default function Home() {
             </div>
             <span>More</span>
           </div>
-        </div>
-
-        <div className="commit-feed reveal delay-2 mt-8 overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--ink-2)]">
-          <div className="commit-feed-head flex items-center justify-between border-b border-[var(--line)] px-6 py-[18px] [font-family:var(--mono)] text-[11px] uppercase tracking-[0.12em] text-[var(--muted)]">
-            <span>RECENT COMMITS</span>
-            <span className="live-dot inline-flex items-center gap-2 text-[var(--green)]">
-              LIVE
-            </span>
-          </div>
-          {commits.map(([hash, repo, message, time]) => (
-            <div
-              className="commit-row grid grid-cols-[90px_1fr_auto] items-center gap-5 border-b border-[var(--line)] px-6 py-4 [font-family:var(--mono)] text-[13px] last:border-b-0 max-[640px]:grid-cols-[70px_1fr] max-[640px]:gap-3 max-[640px]:px-4 max-[640px]:py-3.5"
-              key={hash}
-            >
-              <span className="commit-hash text-[var(--accent)]">{hash}</span>
-              <span className="commit-msg overflow-hidden text-ellipsis whitespace-nowrap font-sans text-sm font-normal text-[var(--text)] max-[640px]:text-[13px]">
-                <span className="repo mr-2 rounded bg-[rgb(232_199_122_/_10%)] px-1.5 py-0.5 [font-family:var(--mono)] text-[11px] text-[var(--gold)]">
-                  {repo}
-                </span>
-                {message}
-              </span>
-              <span className="commit-time whitespace-nowrap text-[11px] text-[var(--muted)] max-[640px]:col-span-full max-[640px]:pl-[82px] max-[640px]:text-[10px]">
-                {time}
-              </span>
-            </div>
-          ))}
         </div>
       </section>
 

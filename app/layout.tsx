@@ -21,7 +21,7 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Talal Majeed — Software Developer",
+  title: "Talal Majeed - Software Developer",
   description:
     "Software & AI engineer working across cloud infrastructure, intelligent agents, and full-stack platforms.",
 };
