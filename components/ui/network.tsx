@@ -20,7 +20,7 @@ const links = [
   { id: "github", label: "GitHub", href: "https://github.com/TalalMajeed" },
   { id: "mail", label: "Mail", href: "mailto:m.talal.majeed@gmail.com" },
   { id: "upwork", label: "Upwork", href: "https://www.upwork.com/freelancers/muhammadtalalm" },
-  { id: "resume", label: "Resume", href: "/resume.pdf" },
+  { id: "resume", label: "Resume", href: "/Talal%20Majeed%20-%20Resume.pdf" },
 ];
 
 function randomBetween(min: number, max: number) {

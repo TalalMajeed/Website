@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ContactNetwork } from "@/components/ui/network";
+import { WorkCarousel } from "@/components/ui/work-carousel";
 
 const skillRows = [
   [
@@ -110,7 +111,6 @@ const cases = [
     title: ["TheGoodSales", "Platform"],
     desc: "A working tool for sales executives — feed it your leads, get back the signal: who they are, what they care about, what to send next. Built on Vertex AI for reasoning, Firestore for state, deployed on Cloud Run. The kind of internal tool I'd want as an operator.",
     stack: ["Vertex AI", "Cloud Run", "Next.js", "Firestore"],
-    delay: "",
     status: "",
   },
   {
@@ -119,7 +119,6 @@ const cases = [
     title: ["Decentralized", "Voting"],
     desc: "A voting platform with verifiability baked in — Metamask for identity, Sepolia TestNet for the ledger. Ganache and Truffle locally; Next.js on top. A study in what real trustless systems take to build, end to end.",
     stack: ["Solidity", "Sepolia", "Ganache", "Truffle", "Next.js"],
-    delay: "delay-1",
     status: "Shipped 2025",
   },
   {
@@ -128,7 +127,6 @@ const cases = [
     title: ["NeuroFlow", "AI"],
     desc: "A workflow generator. Describe what you're trying to do; it draws the workflow back, grounded in your existing context. Vue 3 on the frontend, Flask underneath, Postgres for memory. The earliest piece of agentic tooling I'd built.",
     stack: ["Vue 3", "Flask", "PostgreSQL"],
-    delay: "delay-2",
     status: "Shipped 2024",
   },
 ];
@@ -367,57 +365,7 @@ export default function Home() {
           Some things I&apos;ve <span className="accent">built recently.</span>
         </h2>
 
-        <div className="case-grid grid grid-cols-6 gap-6">
-          {cases.map((item) => (
-            <article
-              className={`case reveal ${item.delay} relative col-span-3 flex min-h-[420px] flex-col overflow-hidden border border-[var(--line)] bg-[var(--ink-2)] p-9 transition-all duration-500 first:col-span-6 first:min-h-[380px] hover:-translate-y-1.5 hover:border-[var(--accent)] max-[880px]:col-span-6 max-[880px]:min-h-80 max-[880px]:p-7`}
-              data-link
-              key={item.num}
-            >
-              {!item.status ? (
-                <div className="case-glyph absolute right-9 top-9 text-right [font-family:var(--mono)] text-[10px] leading-relaxed tracking-[0.1em] text-[var(--muted-2)] opacity-70">
-                  {item.glyph.split("\n").map((line) => (
-                    <span key={line}>
-                      {line}
-                      <br />
-                    </span>
-                  ))}
-                </div>
-              ) : null}
-              <div className="case-head mb-6 flex items-start justify-between">
-                <div className="case-num [font-family:var(--mono)] text-[11px] tracking-[0.1em] text-[var(--muted)]">
-                  {item.num}
-                </div>
-                {item.status ? (
-                  <div className="case-status shipped border border-[rgb(255_84_54_/_30%)] bg-[rgb(255_84_54_/_10%)] px-2.5 py-1 [font-family:var(--mono)] text-[10px] uppercase tracking-[0.1em] text-[var(--accent)]">
-                    {item.status}
-                  </div>
-                ) : null}
-              </div>
-              <h3 className="case-title mb-4 [font-family:var(--display)] text-[clamp(28px,3.2vw,46px)] font-medium leading-[1.05] tracking-[-0.03em]">
-                {item.title[0]} <span className="accent">{item.title[1]}</span>
-              </h3>
-              <p className="case-desc mb-auto max-w-[580px] text-[15px] leading-relaxed text-[var(--muted)]">
-                {item.desc}
-              </p>
-              <div className="case-foot mt-8 flex flex-wrap items-end justify-between gap-5 border-t border-[var(--line)] pt-6">
-                <div className="case-stack flex flex-wrap gap-1.5">
-                  {item.stack.map((tech) => (
-                    <span
-                      className="[font-family:var(--mono)] text-[10.5px] tracking-[0.04em] text-[var(--muted)]"
-                      key={tech}
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                <div className="case-arrow [font-family:var(--display)] text-[28px] text-[var(--accent)] transition-transform duration-300">
-                  ↗
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
+        <WorkCarousel cases={cases} />
       </section>
 
       <section id="activity" className={`${sectionBase} activity`}>

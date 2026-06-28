@@ -487,6 +487,37 @@ body.hover-link .cursor-dot {
   color: var(--muted-2);
 }
 
+.work-track {
+  cursor: grab;
+}
+
+.work-track:active {
+  cursor: grabbing;
+}
+
+.work-wire {
+  stroke: rgb(255 84 54 / 55%);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 5;
+  animation: work-wire-flow 1.4s linear infinite;
+}
+
+.work-wire-node {
+  fill: var(--accent);
+}
+
+@keyframes work-wire-flow {
+  to {
+    stroke-dashoffset: -22;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-wire {
+    animation: none;
+  }
+}
+
 .contact-network {
   position: relative;
   min-height: min(58vh, 560px);

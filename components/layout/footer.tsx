@@ -14,7 +14,7 @@ const socialLinks = [
   ["LinkedIn", "https://www.linkedin.com/in/talalmajeed/"],
   ["Upwork", "https://www.upwork.com/freelancers/muhammadtalalm"],
   ["Email", "mailto:m.talal.majeed@gmail.com"],
-  ["Resume PDF", "/resume.pdf"],
+  ["Resume PDF", "/Talal%20Majeed%20-%20Resume.pdf"],
 ];
 
 export function Footer() {
