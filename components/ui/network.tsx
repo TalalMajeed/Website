@@ -16,12 +16,11 @@ type Edge = {
 };
 
 const links = [
-  { id: "linkedin", label: "LinkedIn", href: "https://linkedin.com/in/talalmajeed" },
-  { id: "instagram", label: "Instagram", href: "https://instagram.com/talalmajeed" },
+  { id: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/talalmajeed/" },
   { id: "github", label: "GitHub", href: "https://github.com/TalalMajeed" },
   { id: "mail", label: "Mail", href: "mailto:m.talal.majeed@gmail.com" },
-  { id: "upwork", label: "Upwork", href: "#" },
-  { id: "resume", label: "Resume", href: "#" },
+  { id: "upwork", label: "Upwork", href: "https://www.upwork.com/freelancers/muhammadtalalm" },
+  { id: "resume", label: "Resume", href: "/resume.pdf" },
 ];
 
 function randomBetween(min: number, max: number) {
@@ -65,16 +64,6 @@ function makeNetwork() {
 }
 
 function NetworkIcon({ id }: { id: string }) {
-  if (id === "instagram") {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <rect x="5" y="5" width="14" height="14" rx="4" />
-        <circle cx="12" cy="12" r="3" />
-        <circle cx="16.5" cy="7.5" r="1" />
-      </svg>
-    );
-  }
-
   if (id === "mail") {
     return (
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -147,6 +136,7 @@ export function ContactNetwork() {
           href={node.href}
           key={node.id}
           rel={node.href.startsWith("http") ? "noopener" : undefined}
+          download={node.id === "resume" ? true : undefined}
           style={{ left: `${node.x}%`, top: `${node.y}%` }}
           target={node.href.startsWith("http") ? "_blank" : undefined}
         >

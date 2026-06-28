@@ -487,13 +487,22 @@ export default function Home() {
                 GitHub
               </a>
               <a
-                href="https://linkedin.com/in/talalmajeed"
+                href="https://www.linkedin.com/in/talalmajeed/"
                 target="_blank"
                 rel="noopener"
                 className="flex items-center gap-2 pb-0.5 text-[var(--muted)] transition-colors hover:text-[var(--text)]"
                 data-link
               >
                 LinkedIn
+              </a>
+              <a
+                href="https://www.upwork.com/freelancers/muhammadtalalm"
+                target="_blank"
+                rel="noopener"
+                className="flex items-center gap-2 pb-0.5 text-[var(--muted)] transition-colors hover:text-[var(--text)]"
+                data-link
+              >
+                Upwork
               </a>
               <a
                 href="mailto:m.talal.majeed@gmail.com"

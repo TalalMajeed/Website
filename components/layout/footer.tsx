@@ -11,10 +11,10 @@ const navigateLinks = [
 
 const socialLinks = [
   ["GitHub", "https://github.com/TalalMajeed"],
-  ["LinkedIn", "https://linkedin.com/in/talalmajeed"],
-  ["X / Twitter", "https://twitter.com/"],
+  ["LinkedIn", "https://www.linkedin.com/in/talalmajeed/"],
+  ["Upwork", "https://www.upwork.com/freelancers/muhammadtalalm"],
   ["Email", "mailto:m.talal.majeed@gmail.com"],
-  ["Resume PDF", "#"],
+  ["Resume PDF", "/resume.pdf"],
 ];
 
 export function Footer() {
@@ -58,6 +58,7 @@ export function Footer() {
                 href={href}
                 target={href.startsWith("http") ? "_blank" : undefined}
                 rel={href.startsWith("http") ? "noopener" : undefined}
+                download={href.endsWith(".pdf") ? true : undefined}
                 className="flex items-center gap-1.5 py-[7px] text-sm text-[var(--muted)] transition hover:translate-x-1 hover:text-[var(--accent)]"
                 data-link
               >

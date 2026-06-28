@@ -49,6 +49,14 @@ export function Header() {
               {label}
             </a>
           ))}
+          <a
+            href="/resume.pdf"
+            download
+            className="relative text-[13px] font-medium tracking-[0.02em] text-[var(--muted)] transition-colors after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-[var(--accent)] after:transition-all hover:text-[var(--text)] hover:after:w-full max-[780px]:hidden"
+            data-link
+          >
+            Resume
+          </a>
           <Button href="#contact" variant="nav">
             Get in touch <span aria-hidden="true">-&gt;</span>
           </Button>
