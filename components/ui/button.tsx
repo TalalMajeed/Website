@@ -24,7 +24,7 @@ const variantClass: Record<ButtonVariant, string> = {
   primary:
     "btn group inline-flex items-center gap-3 overflow-hidden border border-[var(--accent)] bg-[var(--accent)] px-6 py-4 [font-family:var(--mono)] text-[13px] font-medium tracking-[0.04em] text-[var(--ink)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--accent-soft)] hover:bg-[var(--accent-soft)]",
   ghost:
-    "btn group inline-flex items-center gap-3 overflow-hidden border border-[var(--line)] bg-transparent px-6 py-4 [font-family:var(--mono)] text-[13px] tracking-[0.04em] text-[var(--text)] transition-all duration-300 hover:border-[var(--text)] hover:bg-[rgb(240_237_230_/_5%)]",
+    "btn group inline-flex items-center gap-3 overflow-hidden border border-[var(--line)] bg-transparent px-6 py-4 [font-family:var(--mono)] text-[13px] tracking-[0.04em] text-[var(--text)] transition-all duration-300 hover:border-[var(--text)] hover:bg-[rgb(var(--text-rgb)_/_5%)]",
   nav:
     "nav-cta border border-[var(--line)] bg-transparent px-4 py-[9px] [font-family:var(--mono)] text-xs text-[var(--text)] transition-all duration-200 hover:border-[var(--accent)] hover:bg-[rgb(255_84_54_/_8%)] max-[780px]:px-3.5 max-[780px]:py-2 max-[780px]:text-[11px]",
   newsletter:

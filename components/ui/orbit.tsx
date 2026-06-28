@@ -69,9 +69,23 @@ export function OrbitGame() {
     w: 0,
     h: 0,
     dpr: 1,
+    // pock dots need more opacity to read on the light playfield
+    pockAlpha: 0.3,
   });
 
   const rafRef = useRef<number | null>(null);
+
+  // track the active theme so the crater pocks stay visible on both palettes
+  useEffect(() => {
+    const root = document.documentElement;
+    const sync = () => {
+      state.current.pockAlpha = root.dataset.theme === "light" ? 0.6 : 0.3;
+    };
+    sync();
+    const observer = new MutationObserver(sync);
+    observer.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+    return () => observer.disconnect();
+  }, []);
 
   const resize = useCallback(() => {
     const canvas = canvasRef.current;
@@ -174,10 +188,6 @@ export function OrbitGame() {
       ctx.translate(cx, cy);
       ctx.rotate(s.angle + Math.PI / 2);
 
-      // glow
-      ctx.shadowColor = "rgba(255,84,54,0.9)";
-      ctx.shadowBlur = 22;
-
       ctx.beginPath();
       ctx.moveTo(0, -SHIP_R * 1.3);
       ctx.lineTo(SHIP_R, SHIP_R);
@@ -268,6 +278,9 @@ export function OrbitGame() {
               deadCraters.add(c);
               s.score += 1;
               setScore(s.score);
+            } else {
+              // chip the crater down a touch on each surviving hit
+              c.r = Math.max(6, c.r * 0.85);
             }
             break;
           }
@@ -290,22 +303,12 @@ export function OrbitGame() {
       ctx.scale(s.dpr, s.dpr);
       ctx.clearRect(0, 0, s.w, s.h);
 
-      // faint orbit guide ring
-      ctx.beginPath();
-      ctx.arc(cx, cy, SHIP_R * 2.4, 0, Math.PI * 2);
-      ctx.strokeStyle = "rgba(255,84,54,0.12)";
-      ctx.lineWidth = 1;
-      ctx.stroke();
-
       // bullets
       for (const b of s.bullets) {
         ctx.beginPath();
         ctx.arc(b.x, b.y, 2.4, 0, Math.PI * 2);
         ctx.fillStyle = "#e8c77a";
-        ctx.shadowColor = "rgba(232,199,122,0.8)";
-        ctx.shadowBlur = 8;
         ctx.fill();
-        ctx.shadowBlur = 0;
       }
 
       // craters
@@ -315,17 +318,12 @@ export function OrbitGame() {
         ctx.rotate(c.angle);
         ctx.beginPath();
         ctx.arc(0, 0, c.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(20,20,28,0.95)";
-        ctx.shadowColor = c.glow;
-        ctx.shadowBlur = 14;
-        ctx.fill();
-        ctx.shadowBlur = 0;
         ctx.lineWidth = 1.75;
         ctx.strokeStyle = c.color;
         ctx.stroke();
         // crater pocks tinted to the kind's color
-        ctx.fillStyle = c.glow;
-        ctx.globalAlpha = 0.3;
+        ctx.fillStyle = c.color;
+        ctx.globalAlpha = s.pockAlpha;
         ctx.beginPath();
         ctx.arc(c.r * 0.3, -c.r * 0.2, c.r * 0.28, 0, Math.PI * 2);
         ctx.fill();
@@ -437,7 +435,7 @@ export function OrbitGame() {
         <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
 
         {!running && (
-          <div className="absolute inset-0 grid place-items-center bg-[rgb(10_10_15_/_82%)] px-6 text-center">
+          <div className="absolute inset-0 grid place-items-center bg-[rgb(var(--ink-rgb)_/_82%)] px-6 text-center">
             <div>
               {over ? (
                 <>
@@ -472,7 +470,7 @@ export function OrbitGame() {
                 <Link
                   href="/"
                   data-link
-                  className="btn group inline-flex items-center gap-3 border border-[var(--line)] bg-transparent px-6 py-3.5 [font-family:var(--mono)] text-[13px] tracking-[0.04em] text-[var(--text)] transition-all duration-300 hover:border-[var(--text)] hover:bg-[rgb(240_237_230_/_5%)]"
+                  className="btn group inline-flex items-center gap-3 border border-[var(--line)] bg-transparent px-6 py-3.5 [font-family:var(--mono)] text-[13px] tracking-[0.04em] text-[var(--text)] transition-all duration-300 hover:border-[var(--text)] hover:bg-[rgb(var(--text-rgb)_/_5%)]"
                 >
                   Back home
                 </Link>

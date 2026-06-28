@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ui/theme";
 
 const navItems = [
   ["About", "#about"],
@@ -25,8 +26,8 @@ export function Header() {
     <header
       className={`header fixed inset-x-0 top-0 z-[100] border-b backdrop-blur-[14px] transition-colors duration-300 ${
         scrolled
-          ? "border-[var(--line)] bg-[rgb(10_10_15_/_80%)]"
-          : "border-transparent bg-[rgb(10_10_15_/_55%)]"
+          ? "border-[var(--line)] bg-[rgb(var(--ink-rgb)_/_80%)]"
+          : "border-transparent bg-[rgb(var(--ink-rgb)_/_55%)]"
       }`}
       id="header"
     >
@@ -60,6 +61,7 @@ export function Header() {
           <Button href="#contact" variant="nav">
             Get in touch <span aria-hidden="true">-&gt;</span>
           </Button>
+          <ThemeToggle />
         </nav>
       </div>
     </header>
