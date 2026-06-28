@@ -216,8 +216,6 @@ body.hover-link .cursor-dot {
   overflow: hidden;
   position: relative;
   margin-top: 16px;
-  mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
 }
 
 .skills-track {
@@ -268,13 +266,13 @@ body.hover-link .cursor-dot {
 .exp-flow::before {
   content: "";
   bottom: 0;
-  background: linear-gradient(to bottom, transparent 0%, var(--line) 4%, var(--line) 96%, transparent 100%);
+  background: var(--line);
 }
 
 .exp-spine-live {
   z-index: 1;
   height: 0;
-  background: linear-gradient(to bottom, transparent 0%, var(--accent) 4%, var(--accent) 96%, transparent 100%);
+  background: var(--accent);
   transition: height 2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -340,9 +338,6 @@ body.hover-link .cursor-dot {
   width: 13px;
   height: 13px;
   background: var(--accent);
-  box-shadow:
-    0 0 0 4px rgb(255 84 54 / 15%),
-    0 0 16px var(--accent);
   transform: scale(0);
   transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1s;
 }
@@ -357,7 +352,6 @@ body.hover-link .cursor-dot {
 
 .exp-card.in::after {
   transform: scale(1);
-  animation: nodePulse 3s ease-in-out infinite 2s;
 }
 
 .exp-card:hover .exp-role {
@@ -583,14 +577,6 @@ body.hover-link .cursor-dot {
 @keyframes marquee-reverse {
   from {
     transform: translateX(-50%);
-  }
-}
-
-@keyframes nodePulse {
-  50% {
-    box-shadow:
-      0 0 0 8px rgb(255 84 54 / 8%),
-      0 0 24px var(--accent);
   }
 }
 

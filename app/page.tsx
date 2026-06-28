@@ -2,38 +2,38 @@ import { Button } from "@/components/ui/button";
 
 const skillRows = [
   [
-    ["TypeScript", "featured"],
-    ["Python", ""],
-    ["C / C++", ""],
-    ["Java", ""],
-    ["JavaScript", ""],
-    ["SQL", ""],
-    ["Kubernetes", "featured"],
-    ["Docker", ""],
-    ["Azure", ""],
-    ["AWS", ""],
-    ["Google Cloud", ""],
-    ["Vertex AI", "outline-gold"],
-    ["Jenkins", ""],
-    ["CI / CD", ""],
-    ["Kafka", ""],
+    "TypeScript",
+    "Python",
+    "C / C++",
+    "Java",
+    "JavaScript",
+    "SQL",
+    "Kubernetes",
+    "Docker",
+    "Azure",
+    "AWS",
+    "Google Cloud",
+    "Vertex AI",
+    "Jenkins",
+    "CI / CD",
+    "Kafka",
   ],
   [
-    ["ReactJS", ""],
-    ["Next.js", ""],
-    ["NestJS", ""],
-    ["Spring", ""],
-    ["Django", ""],
-    ["FastAPI", ""],
-    ["PyTorch", "outline-gold"],
-    ["n8n", ""],
-    ["Hadoop", ""],
-    ["PowerBI", ""],
-    ["Grafana · Loki", "featured"],
-    ["Prometheus", ""],
-    ["Redis", ""],
-    ["LiveKit", ""],
-    ["Twilio", ""],
+    "ReactJS",
+    "Next.js",
+    "NestJS",
+    "Spring",
+    "Django",
+    "FastAPI",
+    "PyTorch",
+    "n8n",
+    "Hadoop",
+    "PowerBI",
+    "Grafana · Loki",
+    "Prometheus",
+    "Redis",
+    "LiveKit",
+    "Twilio",
   ],
 ];
 
@@ -202,12 +202,12 @@ export default function Home() {
 
       <section className={sectionBase} id="about">
         <div className={coordClass}>
-          ABOUT — §01
+          ABOUT — 01
           <br />
           NUST · ISLAMABAD
         </div>
         <div className={eyebrowClass}>
-          <span>§ 01 · About</span>
+          <span>01 · About</span>
         </div>
         <div className="about-grid grid grid-cols-[1.2fr_1fr] gap-20 max-[880px]:grid-cols-1 max-[880px]:gap-[50px]">
           <div className="about-thesis reveal [font-family:var(--display)] text-[clamp(28px,3.4vw,46px)] font-normal leading-[1.15] tracking-[-0.025em]">
@@ -257,9 +257,9 @@ export default function Home() {
 
       <section id="skills" className="skills relative mx-auto max-w-full py-[clamp(80px,12vh,140px)]">
         <div className="skills-inner mx-auto max-w-[var(--maxw)] px-[var(--gutter)]">
-          <div className={coordClass}>SKILLS — §02</div>
+          <div className={coordClass}>SKILLS — 02</div>
           <div className={eyebrowClass}>
-            <span>§ 02 · Stack</span>
+            <span>02 · Stack</span>
           </div>
           <h2 className={sectionTitleClass}>
             The tools I <span className="accent">reach for.</span>
@@ -272,15 +272,9 @@ export default function Home() {
             key={index}
           >
             <div className={`skills-track ${index === 1 ? "reverse fast" : ""}`}>
-              {[...row, ...row].map(([skill, extra], skillIndex) => (
+              {[...row, ...row].map((skill, skillIndex) => (
                 <div
-                  className={`skill border px-[22px] py-3.5 [font-family:var(--mono)] text-sm tracking-[0.01em] transition-all duration-300 ${
-                    extra === "featured"
-                      ? "border-[var(--accent)] bg-[var(--accent)] font-medium text-[var(--ink)]"
-                      : extra === "outline-gold"
-                        ? "border-[var(--gold)] bg-[var(--ink-2)] text-[var(--gold)]"
-                        : "border-[var(--line)] bg-[var(--ink-2)] text-[var(--text)]"
-                  }`}
+                  className="skill border border-[var(--line)] bg-[var(--ink-2)] px-[22px] py-3.5 [font-family:var(--mono)] text-sm tracking-[0.01em] text-[var(--text)] transition-all duration-300"
                   key={`${skill}-${skillIndex}`}
                 >
                   {skill}
@@ -302,9 +296,9 @@ export default function Home() {
       </section>
 
       <section className={sectionBase} id="experience">
-        <div className={coordClass}>EXPERIENCE — §03</div>
+        <div className={coordClass}>EXPERIENCE — 03</div>
         <div className={eyebrowClass}>
-          <span>§ 03 · Experience</span>
+          <span>03 · Experience</span>
         </div>
         <h2 className={sectionTitleClass}>
           Where I&apos;ve <span className="accent">shipped.</span>
@@ -363,9 +357,9 @@ export default function Home() {
       </section>
 
       <section className={sectionBase} id="work">
-        <div className={coordClass}>SELECTED WORK — §04</div>
+        <div className={coordClass}>SELECTED WORK — 04</div>
         <div className={eyebrowClass}>
-          <span>§ 04 · Case Studies</span>
+          <span>04 · Case Studies</span>
         </div>
         <h2 className={sectionTitleClass}>
           Three things I&apos;ve <span className="accent">built recently.</span>
@@ -425,9 +419,9 @@ export default function Home() {
       </section>
 
       <section id="activity" className={`${sectionBase} activity`}>
-        <div className={coordClass}>ACTIVITY — §05</div>
+        <div className={coordClass}>ACTIVITY — 05</div>
         <div className={eyebrowClass}>
-          <span>§ 05 · Activity</span>
+          <span>05 · Activity</span>
         </div>
         <h2 className={sectionTitleClass}>
           A year of <span className="accent">commits.</span>
@@ -467,11 +461,11 @@ export default function Home() {
         id="contact"
         className={`${sectionBase} contact py-[clamp(80px,12vh,160px)] text-left`}
       >
-        <div className={coordClass}>CONTACT — §06</div>
+        <div className={coordClass}>CONTACT — 06</div>
         <div className={eyebrowClass}>
-          <span>§ 06 · Contact</span>
+          <span>06 · Contact</span>
         </div>
-        <h1 className="contact-headline reveal mb-[50px] [font-family:var(--display)] text-[clamp(48px,9vw,140px)] font-medium leading-[0.95] tracking-[-0.05em]">
+        <h1 className="contact-headline reveal mb-[50px] [font-family:var(--display)] text-[clamp(40px,6.8vw,96px)] font-medium leading-[0.98] tracking-[-0.04em]">
           Have something <span className="accent">worth building?</span>
           <br />
           <span className="quiet font-light text-[var(--muted-2)]">
