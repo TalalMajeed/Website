@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ContactNetwork } from "@/components/ui/network";
-import { WorkCarousel } from "@/components/ui/work-carousel";
+import { WorkCarousel } from "@/components/ui/carousel";
 
 const skillRows = [
   [
