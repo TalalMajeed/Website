@@ -65,6 +65,8 @@ export function OrbitGame() {
   const state = useRef({
     angle: -Math.PI / 2, // ship nose direction
     turn: 0, // -1 = rotate left, +1 = rotate right, 0 = hold
+    // mouse position relative to the canvas; null until the pointer moves over it
+    mouse: null as Vec | null,
     bullets: [] as Bullet[],
     craters: [] as Crater[],
     lastShot: 0,
@@ -123,6 +125,7 @@ export function OrbitGame() {
     const s = state.current;
     s.angle = -Math.PI / 2;
     s.turn = 0;
+    s.mouse = null;
     s.bullets = [];
     s.craters = [];
     s.lastShot = 0;
@@ -239,8 +242,21 @@ export function OrbitGame() {
       const cx = s.w / 2;
       const cy = s.h / 2;
 
-      // rotation
-      if (s.turn !== 0) s.angle += ROTATE_SPEED * s.turn;
+      // rotation — point the ship's nose at the mouse cursor. The desired
+      // heading is the angle from the ship (canvas center) to the pointer,
+      // mapped from the (cos, sin) components of that vector via atan2.
+      if (s.mouse) {
+        const target = Math.atan2(s.mouse.y - cy, s.mouse.x - cx);
+        // turn toward the target along the shortest arc, capped by ROTATE_SPEED
+        let diff = target - s.angle;
+        diff = Math.atan2(Math.sin(diff), Math.cos(diff)); // wrap to [-π, π]
+        const stepTurn = Math.max(-ROTATE_SPEED, Math.min(ROTATE_SPEED, diff));
+        s.angle += stepTurn;
+        // surface a little thrust while actively rotating toward the cursor
+        s.turn = Math.abs(diff) > 0.02 ? (stepTurn < 0 ? -1 : 1) : 0;
+      } else if (s.turn !== 0) {
+        s.angle += ROTATE_SPEED * s.turn;
+      }
 
       // firing
       if (now - s.lastShot >= FIRE_INTERVAL) {
@@ -418,13 +434,21 @@ export function OrbitGame() {
     };
   }, [running, start]);
 
-  // pointer support — left half rotates left, right half rotates right
-  const pointerDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+  // pointer support — the ship aims its nose wherever you tap or move the
+  // cursor. On touch this fires on the initial tap (down) and tracks drags.
+  const aimAt = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    state.current.turn = e.clientX - rect.left < rect.width / 2 ? -1 : 1;
+    state.current.mouse = {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    };
   }, []);
   const pointerUp = useCallback(() => {
     state.current.turn = 0;
+  }, []);
+  const pointerLeave = useCallback(() => {
+    state.current.turn = 0;
+    state.current.mouse = null;
   }, []);
 
   return (
@@ -445,15 +469,19 @@ export function OrbitGame() {
 
       <div
         ref={wrapRef}
-        className="relative aspect-[16/10] w-full touch-none select-none"
-        onPointerDown={running ? pointerDown : undefined}
+        className="relative aspect-[4/5] w-full touch-none select-none min-[640px]:aspect-[16/10]"
+        onPointerDown={running ? aimAt : undefined}
         onPointerUp={pointerUp}
-        onPointerLeave={pointerUp}
+        onPointerMove={running ? aimAt : undefined}
+        onPointerLeave={pointerLeave}
       >
         <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
 
         {!running && (
-          <div className="absolute inset-0 grid place-items-center bg-[rgb(var(--ink-rgb)_/_82%)] px-6 text-center">
+          <div
+            className="absolute inset-0 grid cursor-pointer place-items-center bg-[rgb(var(--ink-rgb)_/_82%)] px-6 text-center"
+            onClick={start}
+          >
             <div>
               {over ? (
                 <>
@@ -462,12 +490,20 @@ export function OrbitGame() {
                   </div>
                   <div className="mb-6 [font-family:var(--mono)] text-[13px] tracking-[0.04em] text-[var(--muted)]">
                     You cleared{" "}
-                    <span className="text-[var(--text)]">{score}</span> craters.
-                    Press{" "}
-                    <kbd className="border border-[var(--line)] bg-[var(--surface)] px-2 py-0.5 text-[var(--accent)]">
-                      ENTER
-                    </kbd>{" "}
-                    to retry.
+                    <span className="text-[var(--text)]">{score}</span> craters.{" "}
+                    <span className="hidden min-[640px]:inline">
+                      Press{" "}
+                      <kbd className="border border-[var(--line)] bg-[var(--surface)] px-2 py-0.5 text-[var(--accent)]">
+                        ENTER
+                      </kbd>{" "}
+                      to retry.
+                    </span>
+                    <span className="min-[640px]:hidden">
+                      <kbd className="border border-[var(--line)] bg-[var(--surface)] px-2 py-0.5 text-[var(--accent)]">
+                        TAP
+                      </kbd>{" "}
+                      to retry.
+                    </span>
                   </div>
                 </>
               ) : (
@@ -476,11 +512,19 @@ export function OrbitGame() {
                     Hold the line.
                   </div>
                   <div className="mb-6 [font-family:var(--mono)] text-[13px] tracking-[0.03em] text-[var(--muted)]">
-                    Press{" "}
-                    <kbd className="border border-[var(--line)] bg-[var(--surface)] px-2 py-0.5 text-[var(--accent)]">
-                      ENTER
-                    </kbd>{" "}
-                    to play.
+                    <span className="hidden min-[640px]:inline">
+                      Press{" "}
+                      <kbd className="border border-[var(--line)] bg-[var(--surface)] px-2 py-0.5 text-[var(--accent)]">
+                        ENTER
+                      </kbd>{" "}
+                      to play.
+                    </span>
+                    <span className="min-[640px]:hidden">
+                      <kbd className="border border-[var(--line)] bg-[var(--surface)] px-2 py-0.5 text-[var(--accent)]">
+                        TAP
+                      </kbd>{" "}
+                      to play.
+                    </span>
                   </div>
                 </>
               )}
@@ -488,6 +532,7 @@ export function OrbitGame() {
                 <Link
                   href="/"
                   data-link
+                  onClick={(e) => e.stopPropagation()}
                   className="btn group inline-flex items-center gap-3 border border-[var(--line)] bg-transparent px-6 py-3.5 [font-family:var(--mono)] text-[13px] tracking-[0.04em] text-[var(--text)] transition-all duration-300 hover:border-[var(--text)] hover:bg-[rgb(var(--text-rgb)_/_5%)]"
                 >
                   Back home
@@ -499,7 +544,7 @@ export function OrbitGame() {
       </div>
 
       <div className="border-t border-[var(--line)] px-4 py-2.5 [font-family:var(--mono)] text-[10px] uppercase tracking-[0.12em] text-[var(--muted-2)]">
-        ← → / TAP SIDES — ROTATE · AUTO-FIRE ENGAGED
+        MOVE / TAP TO AIM · AUTO-FIRE ENGAGED
       </div>
     </div>
   );

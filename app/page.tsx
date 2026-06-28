@@ -310,7 +310,7 @@ export default function Home() {
           <div className="exp-cards relative z-[2] flex flex-col gap-[60px] max-[880px]:gap-10">
             {experiences.map((item) => (
               <div
-                className={`exp-card ${item.align} w-[calc(50%-50px)] border border-[var(--line)] bg-[var(--ink-2)] px-[30px] py-7 transition-all duration-500 hover:-translate-y-1 hover:border-[var(--accent)] hover:shadow-[0_20px_50px_-20px_rgb(255_84_54_/_25%)] max-[880px]:w-[calc(100%-60px)] max-[880px]:self-end max-[880px]:px-[22px] max-[880px]:py-6`}
+                className={`exp-card ${item.align} w-[calc(50%-50px)] border border-[var(--line)] bg-[var(--ink-2)] px-[30px] py-7 transition-all duration-500 hover:-translate-y-1 hover:border-[var(--accent)] max-[880px]:w-[calc(100%-60px)] max-[880px]:self-end max-[880px]:px-[22px] max-[880px]:py-6`}
                 data-link
                 key={item.role}
               >
