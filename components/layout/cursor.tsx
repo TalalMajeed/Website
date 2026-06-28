@@ -73,6 +73,76 @@ export function Cursor() {
     );
     document.querySelectorAll(".exp-card").forEach((card) => cardObserver.observe(card));
 
+    const terminal = document.querySelector<HTMLElement>("[data-terminal]");
+    const terminalTimeouts: number[] = [];
+    const typeTerminal = () => {
+      if (!terminal || terminal.dataset.typed === "true") return;
+
+      terminal.dataset.typed = "true";
+      terminal.classList.add("typing");
+
+      const lines = Array.from(terminal.querySelectorAll<HTMLElement>("[data-line]"));
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let offset = 0;
+
+      if (prefersReducedMotion) {
+        lines.forEach((line) => {
+          line.parentElement?.classList.add("active");
+          line.textContent = line.dataset.line ?? "";
+        });
+        terminal.classList.remove("typing");
+        return;
+      }
+
+      lines.forEach((line) => {
+        const text = line.dataset.line ?? "";
+        line.textContent = "";
+
+        const startTimeout = window.setTimeout(() => {
+          let index = 0;
+          line.parentElement?.classList.add("active");
+          line.classList.add("typing");
+
+          const tick = () => {
+            line.textContent = text.slice(0, index);
+            index += 1;
+
+            if (index <= text.length) {
+              terminalTimeouts.push(window.setTimeout(tick, 18 + Math.random() * 26));
+              return;
+            }
+
+            line.classList.remove("typing");
+
+            if (line === lines[lines.length - 1]) {
+              terminal.classList.remove("typing");
+            }
+          };
+
+          tick();
+        }, offset);
+
+        terminalTimeouts.push(startTimeout);
+        offset += text.length * 22 + 180;
+      });
+    };
+
+    const terminalObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            typeTerminal();
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.35 },
+    );
+
+    if (terminal) {
+      terminalObserver.observe(terminal);
+    }
+
     const graph = document.getElementById("contribGraph");
     const contributionCells: HTMLDivElement[] = [];
 
@@ -211,6 +281,8 @@ export function Cursor() {
       revealObserver.disconnect();
       flowObserver.disconnect();
       cardObserver.disconnect();
+      terminalObserver.disconnect();
+      terminalTimeouts.forEach((timeout) => window.clearTimeout(timeout));
       graphObserver.disconnect();
       commitObserver.disconnect();
     };

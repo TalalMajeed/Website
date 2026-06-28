@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 export function Newsletter() {
-  const [note, setNote] = useState("// Unsubscribe anytime. No tracking pixels.");
+  const [note, setNote] = useState("Unsubscribe anytime.");
   const [isSuccess, setIsSuccess] = useState(false);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -17,7 +17,7 @@ export function Newsletter() {
       return;
     }
 
-    setNote(`// Got it — ${email} is on the list.`);
+    setNote(`Got it! you are on the list.`);
     setIsSuccess(true);
     form.reset();
   }
@@ -47,7 +47,7 @@ export function Newsletter() {
         </Button>
       </form>
       <div
-        className={`newsletter-note mt-3.5 [font-family:var(--mono)] text-[10px] tracking-[0.05em] ${
+        className={`newsletter-note mt-3.5 [font-family:var(--mono)] text-sm leading-relaxed tracking-[0.05em] ${
           isSuccess ? "text-[var(--green)]" : "text-[var(--muted-2)]"
         }`}
       >

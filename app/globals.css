@@ -84,6 +84,7 @@ body::before {
   top: 0;
   left: 0;
   z-index: 9999;
+  border-radius: 9999px !important;
   pointer-events: none;
   transform: translate(-50%, -50%);
   transition:
@@ -118,15 +119,10 @@ body.hover-link .cursor-dot {
   height: 4px;
 }
 
-.eyebrow::before,
 .footer-col-head::before {
   content: "";
   height: 1px;
   background: var(--accent);
-}
-
-.eyebrow::before {
-  width: 24px;
 }
 
 .footer-col-head::before {
@@ -212,6 +208,115 @@ body.hover-link .cursor-dot {
   animation: slide 2.5s ease-in-out infinite;
 }
 
+.about-terminal {
+  position: relative;
+  min-height: 430px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--ink-2);
+  box-shadow: inset 0 1px 0 rgb(240 237 230 / 4%);
+}
+
+.about-terminal::before {
+  content: none;
+}
+
+.terminal-top {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 46px;
+  border-bottom: 1px solid var(--line);
+  padding: 0 18px;
+  background: rgb(10 10 15 / 72%);
+}
+
+.terminal-controls {
+  display: flex;
+  gap: 7px;
+}
+
+.terminal-controls span {
+  width: 13px;
+  height: 13px;
+  border: 0;
+  border-radius: 9999px !important;
+  background: #ff5f57;
+}
+
+.terminal-controls span:nth-child(2) {
+  background: #febc2e;
+}
+
+.terminal-controls span:nth-child(3) {
+  background: #28c840;
+}
+
+.terminal-title {
+  overflow: hidden;
+  font-family: var(--mono);
+  color: rgb(240 237 230 / 62%);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.terminal-title::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 13px;
+  margin-right: 8px;
+  vertical-align: -1px;
+  border-radius: 2px 2px 1px 1px !important;
+  background: linear-gradient(#7ed8ff, #37a9e6);
+  box-shadow: inset 0 2px 0 rgb(255 255 255 / 45%);
+}
+
+.terminal-screen {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 18px;
+  padding: clamp(22px, 3vw, 34px);
+  font-family: var(--mono);
+  font-size: clamp(13px, 1.2vw, 16px);
+  line-height: 1.7;
+}
+
+.terminal-line {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 12px;
+  color: var(--text);
+}
+
+.terminal-prompt {
+  opacity: 0;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+}
+
+.terminal-line.active .terminal-prompt {
+  opacity: 1;
+}
+
+.terminal-muted {
+  color: var(--muted);
+}
+
+.about-terminal.typing [data-line].typing::after {
+  content: "_";
+  display: inline-block;
+  margin-left: 3px;
+  color: var(--accent);
+  animation: terminalCursor 0.8s steps(2, start) infinite;
+}
+
 .skills-marquee {
   overflow: hidden;
   position: relative;
@@ -259,14 +364,14 @@ body.hover-link .cursor-dot {
   top: 0;
   left: 50%;
   z-index: 0;
-  width: 1px;
-  transform: translateX(-0.5px);
+  width: 2px;
+  transform: translateX(-1px);
 }
 
 .exp-flow::before {
   content: "";
   bottom: 0;
-  background: var(--line);
+  background: var(--accent);
 }
 
 .exp-spine-live {
@@ -310,13 +415,9 @@ body.hover-link .cursor-dot {
   position: absolute;
   top: 38px;
   width: 0;
-  height: 1px;
-  background: linear-gradient(to right, var(--accent), var(--line));
+  height: 2px;
+  background: var(--accent);
   transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.4s;
-}
-
-.exp-card.right::before {
-  background: linear-gradient(to left, var(--accent), var(--line));
 }
 
 .exp-card.left::before {
@@ -580,6 +681,12 @@ body.hover-link .cursor-dot {
   }
 }
 
+@keyframes terminalCursor {
+  50% {
+    opacity: 0;
+  }
+}
+
 @keyframes pulse {
   50% {
     opacity: 0.5;
@@ -599,6 +706,10 @@ body.hover-link .cursor-dot {
 }
 
 @media (max-width: 880px) {
+  .about-terminal {
+    min-height: 360px;
+  }
+
   .exp-flow::before,
   .exp-spine-live {
     left: 24px;
@@ -616,7 +727,7 @@ body.hover-link .cursor-dot {
   .exp-card.right::before {
     left: -36px;
     right: auto;
-    background: linear-gradient(to right, var(--accent), var(--line));
+    background: var(--accent);
   }
 
   .exp-card.in::before {

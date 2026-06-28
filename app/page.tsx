@@ -134,10 +134,8 @@ const cases = [
 
 const sectionBase =
   "relative mx-auto max-w-[var(--maxw)] px-[var(--gutter)] py-[clamp(80px,12vh,140px)]";
-const coordClass =
-  "coord absolute right-[var(--gutter)] top-[50px] text-right [font-family:var(--mono)] text-[10px] leading-relaxed tracking-[0.1em] text-[var(--muted-2)]";
 const eyebrowClass =
-  "eyebrow reveal mb-6 flex items-center gap-3 [font-family:var(--mono)] text-[11px] uppercase tracking-[0.15em] text-[var(--muted)]";
+  "eyebrow reveal mb-6 flex items-center gap-3 [font-family:var(--mono)] text-[13px] uppercase tracking-[0.15em] text-[var(--muted)]";
 const sectionTitleClass =
   "section-title reveal mb-[60px] [font-family:var(--display)] text-[clamp(40px,6.4vw,84px)] font-medium leading-none tracking-[-0.04em]";
 
@@ -145,36 +143,29 @@ export default function Home() {
   return (
     <>
       <section
-        className={`${sectionBase} hero relative flex min-h-screen flex-col justify-center overflow-hidden pt-[120px]`}
+        className="hero relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden px-[var(--gutter)] py-[96px] text-center"
         id="top"
       >
         <div className="hero-glow" />
         <div className="hero-glow b" />
 
-        <div className="hero-meta mb-10 flex flex-wrap gap-8 [font-family:var(--mono)] text-xs tracking-[0.05em] text-[var(--muted)]">
-          <div className="hero-meta-item flex items-center gap-2">
-            33.7°N, 73.1°E · Islamabad
-          </div>
-          <div className="hero-meta-item flex items-center gap-2">v.2026.06</div>
-        </div>
-
-        <h1 className="hero-headline mb-6 [font-family:var(--display)] text-[clamp(50px,9.6vw,146px)] font-medium leading-[0.9] tracking-[-0.05em]">
+        <h1 className="hero-headline mb-10 [font-family:var(--display)] text-[clamp(50px,9.6vw,146px)] font-medium leading-[0.9] tracking-[-0.05em]">
           <span className="line">
             <span className="line-inner">
-              <span className="accent">M.</span>Talal{" "}
+              Talal{" "}
               <span className="accent">Majeed</span>
             </span>
           </span>
-          <span className="line -mt-[0.16em] leading-[0.68]">
+          <span className="line leading-[0.82]">
             <span className="line-inner">
-              <span className="quiet text-[0.62em] font-light leading-[0.95] text-[var(--muted)]">
+              <span className="quiet text-[0.46em] font-light leading-[0.95] text-[var(--muted)]">
                 Software Developer
               </span>
             </span>
           </span>
         </h1>
 
-        <p className="hero-sub mb-10 max-w-[540px] text-[clamp(15px,1.35vw,18px)] leading-[1.5] text-[var(--muted)] [&_strong]:font-medium [&_strong]:text-[var(--text)]">
+        <p className="hero-sub mx-auto mb-10 max-w-[900px] text-[clamp(15px,1.35vw,18px)] leading-[1.5] text-[var(--muted)] [&_strong]:font-medium [&_strong]:text-[var(--text)]">
           Software & AI engineer working across <strong>cloud infrastructure</strong>,{" "}
           <strong>intelligent agents</strong>, and{" "}
           <strong>full-stack platforms</strong>. Currently shipping production
@@ -182,42 +173,64 @@ export default function Home() {
           change the shape of software.
         </p>
 
-        <div className="hero-actions flex flex-wrap gap-4">
-          <Button href="#work" variant="primary">
-            See selected work{" "}
+        <div className="hero-actions flex flex-wrap justify-center gap-4">
+          <Button href="#work" variant="primary" className="w-[240px] justify-center max-[520px]:w-full">
+            See my work{" "}
             <span className="arrow transition-transform duration-300 group-hover:translate-x-1">
               -&gt;
             </span>
           </Button>
-          <Button href="#contact" variant="ghost">
+          <Button href="#contact" variant="ghost" className="w-[240px] justify-center max-[520px]:w-full">
             Reach out
           </Button>
         </div>
 
-        <div className="hero-scroll absolute bottom-10 left-[var(--gutter)] flex items-center gap-3 [font-family:var(--mono)] text-[10px] tracking-[0.2em] text-[var(--muted)]">
+        <div className="hero-scroll absolute bottom-10 left-1/2 flex -translate-x-1/2 items-center gap-3 [font-family:var(--mono)] text-[10px] tracking-[0.2em] text-[var(--muted)]">
           <span>SCROLL</span>
           <span className="line" />
         </div>
       </section>
 
       <section className={sectionBase} id="about">
-        <div className={coordClass}>
-          ABOUT — 01
-          <br />
-          NUST · ISLAMABAD
-        </div>
         <div className={eyebrowClass}>
-          <span>01 · About</span>
+          <span>01 - About</span>
         </div>
-        <div className="about-grid grid grid-cols-[1.2fr_1fr] gap-20 max-[880px]:grid-cols-1 max-[880px]:gap-[50px]">
-          <div className="about-thesis reveal [font-family:var(--display)] text-[clamp(28px,3.4vw,46px)] font-normal leading-[1.15] tracking-[-0.025em]">
-            I&apos;m a builder who sits between{" "}
-            <span className="accent">infrastructure</span> and{" "}
-            <span className="accent">intelligence</span>—comfortable wiring up
-            production Kubernetes one week,{" "}
-            <span className="quiet text-[var(--muted)]">
-              and shipping a retrieval pipeline the next.
-            </span>
+        <div className="about-grid grid grid-cols-[1.05fr_1fr] gap-20 max-[880px]:grid-cols-1 max-[880px]:gap-[50px]">
+          <div className="about-terminal reveal" data-terminal>
+            <div className="terminal-top">
+              <div className="terminal-controls" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </div>
+              <div className="terminal-title">talal — -zsh — 120x24</div>
+            </div>
+            <div className="terminal-screen" aria-label="About terminal">
+              <div className="terminal-line">
+                <span className="terminal-prompt">&gt;</span>
+                <span data-line="cat profile.md" />
+              </div>
+              <div className="terminal-line">
+                <span className="terminal-prompt">&gt;</span>
+                <span data-line="Software & DevOps Engineer" />
+              </div>
+              <div className="terminal-line">
+                <span className="terminal-prompt">&gt;</span>
+                <span data-line="cloud infrastructure, intelligent agents, full-stack platforms" />
+              </div>
+              <div className="terminal-line">
+                <span className="terminal-prompt">&gt;</span>
+                <span data-line="keeping banking workloads running across Azure Kubernetes" />
+              </div>
+              <div className="terminal-line">
+                <span className="terminal-prompt">&gt;</span>
+                <span data-line="production systems one week, retrieval pipelines the next" />
+              </div>
+              <div className="terminal-line">
+                <span className="terminal-prompt">&gt;</span>
+                <span data-line="always building, measuring, and tightening the loop" />
+              </div>
+            </div>
           </div>
           <div className="about-side flex flex-col gap-7 pt-5">
             <p className="reveal delay-1 text-base leading-[1.7] text-[var(--muted)] [&_strong]:font-medium [&_strong]:text-[var(--text)]">
@@ -257,9 +270,8 @@ export default function Home() {
 
       <section id="skills" className="skills relative mx-auto max-w-full py-[clamp(80px,12vh,140px)]">
         <div className="skills-inner mx-auto max-w-[var(--maxw)] px-[var(--gutter)]">
-          <div className={coordClass}>SKILLS — 02</div>
           <div className={eyebrowClass}>
-            <span>02 · Stack</span>
+            <span>02 - Stack</span>
           </div>
           <h2 className={sectionTitleClass}>
             The tools I <span className="accent">reach for.</span>
@@ -283,22 +295,11 @@ export default function Home() {
             </div>
           </div>
         ))}
-
-        <div className="skills-inner mx-auto max-w-[var(--maxw)] px-[var(--gutter)]">
-          <div className="skills-cats reveal mt-10 flex flex-wrap gap-10 [font-family:var(--mono)] text-[11px] uppercase tracking-[0.12em] text-[var(--muted)]">
-            <span className="text-[var(--accent)]">↳ Strongest:</span>
-            <span>Cloud Infrastructure · DevOps</span>
-            <span>Backend Systems</span>
-            <span>AI Engineering · RAG</span>
-            <span>Full Stack Web</span>
-          </div>
-        </div>
       </section>
 
       <section className={sectionBase} id="experience">
-        <div className={coordClass}>EXPERIENCE — 03</div>
         <div className={eyebrowClass}>
-          <span>03 · Experience</span>
+          <span>03 - Experience</span>
         </div>
         <h2 className={sectionTitleClass}>
           Where I&apos;ve <span className="accent">shipped.</span>
@@ -319,7 +320,7 @@ export default function Home() {
                   </div>
                   <div className="exp-locale text-right [font-family:var(--mono)] text-[10px] tracking-[0.08em] text-[var(--muted)]">
                     {item.locale}
-                    <span className="country block text-[var(--gold)]">
+                    <span className="country block text-[var(--accent)]">
                       {item.country}
                     </span>
                   </div>
@@ -357,9 +358,8 @@ export default function Home() {
       </section>
 
       <section className={sectionBase} id="work">
-        <div className={coordClass}>SELECTED WORK — 04</div>
         <div className={eyebrowClass}>
-          <span>04 · Case Studies</span>
+          <span>04 - Case Studies</span>
         </div>
         <h2 className={sectionTitleClass}>
           Three things I&apos;ve <span className="accent">built recently.</span>
@@ -387,7 +387,7 @@ export default function Home() {
                   {item.num}
                 </div>
                 {item.status ? (
-                  <div className="case-status shipped border border-[rgb(232_199_122_/_30%)] bg-[rgb(232_199_122_/_10%)] px-2.5 py-1 [font-family:var(--mono)] text-[10px] uppercase tracking-[0.1em] text-[var(--gold)]">
+                  <div className="case-status shipped border border-[rgb(255_84_54_/_30%)] bg-[rgb(255_84_54_/_10%)] px-2.5 py-1 [font-family:var(--mono)] text-[10px] uppercase tracking-[0.1em] text-[var(--accent)]">
                     {item.status}
                   </div>
                 ) : null}
@@ -419,20 +419,12 @@ export default function Home() {
       </section>
 
       <section id="activity" className={`${sectionBase} activity`}>
-        <div className={coordClass}>ACTIVITY — 05</div>
         <div className={eyebrowClass}>
-          <span>05 · Activity</span>
+          <span>05 - Activity</span>
         </div>
         <h2 className={sectionTitleClass}>
           A year of <span className="accent">commits.</span>
         </h2>
-
-        <div className="activity-meta reveal mb-10 flex flex-wrap gap-8 [font-family:var(--mono)] text-xs tracking-[0.04em] text-[var(--muted)] [&_strong]:font-medium [&_strong]:text-[var(--text)]">
-          <span>
-            <span className="accent-num font-semibold text-[var(--accent)]">1994</span> Contributions
-          </span>
-        </div>
-
         <div className="contrib-card reveal delay-1 overflow-hidden border border-[var(--line)] bg-[var(--ink-2)] p-8 max-[640px]:p-5">
           <div className="contrib-card-head mb-7 flex flex-wrap items-center justify-between gap-4">
             <div className="label [font-family:var(--mono)] text-[11px] uppercase tracking-[0.1em] text-[var(--muted)]">
@@ -461,12 +453,11 @@ export default function Home() {
         id="contact"
         className={`${sectionBase} contact py-[clamp(80px,12vh,160px)] text-left`}
       >
-        <div className={coordClass}>CONTACT — 06</div>
         <div className={eyebrowClass}>
-          <span>06 · Contact</span>
+          <span>06 - Contact</span>
         </div>
         <h1 className="contact-headline reveal mb-[50px] [font-family:var(--display)] text-[clamp(40px,6.8vw,96px)] font-medium leading-[0.98] tracking-[-0.04em]">
-          Have something <span className="accent">worth building?</span>
+          Have something <br /><span className="accent">worth building?</span>
           <br />
           <span className="quiet font-light text-[var(--muted-2)]">
             Let&apos;s talk.
