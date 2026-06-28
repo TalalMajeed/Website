@@ -35,10 +35,15 @@ type CraterKind = {
   weight: number; // base spawn probability weight
 };
 
+// The first crater kind uses a soft yellow on dark, but that washes out on the
+// near-white light playfield — swap to a saturated amber so it stays readable.
+const YELLOW_DARK = "#e8c77a";
+const YELLOW_LIGHT = "#c9821a";
+
 // Four crater classes, in roughly ascending danger.
 const CRATER_KINDS: CraterKind[] = [
   // 1. Yellow — small, fast, spinning
-  { color: "#e8c77a", glow: "rgba(232,199,122,0.55)", rMin: 8, rMax: 12, speedMul: 1.55, spin: 0.09, hp: 1, weight: 4 },
+  { color: YELLOW_DARK, glow: "rgba(232,199,122,0.55)", rMin: 8, rMax: 12, speedMul: 1.55, spin: 0.09, hp: 1, weight: 4 },
   // 2. Orange — the baseline
   { color: "#ff5436", glow: "rgba(255,84,54,0.5)", rMin: 13, rMax: 18, speedMul: 1, spin: 0.015, hp: 1, weight: 5 },
   // 3. Purple — huge and a bit slow
@@ -71,6 +76,9 @@ export function OrbitGame() {
     dpr: 1,
     // pock dots need more opacity to read on the light playfield
     pockAlpha: 0.3,
+    // bullets + the small yellow crater wash out on light, so theme-swap them
+    bulletColor: YELLOW_DARK,
+    yellowColor: YELLOW_DARK,
   });
 
   const rafRef = useRef<number | null>(null);
@@ -79,7 +87,16 @@ export function OrbitGame() {
   useEffect(() => {
     const root = document.documentElement;
     const sync = () => {
-      state.current.pockAlpha = root.dataset.theme === "light" ? 0.6 : 0.3;
+      const light = root.dataset.theme === "light";
+      state.current.pockAlpha = light ? 0.6 : 0.3;
+      state.current.bulletColor = light ? YELLOW_LIGHT : YELLOW_DARK;
+      state.current.yellowColor = light ? YELLOW_LIGHT : YELLOW_DARK;
+      // recolor any live yellow craters so the swap is immediate, not next-spawn
+      for (const c of state.current.craters) {
+        if (c.color === YELLOW_DARK || c.color === YELLOW_LIGHT) {
+          c.color = state.current.yellowColor;
+        }
+      }
     };
     sync();
     const observer = new MutationObserver(sync);
@@ -176,7 +193,8 @@ export function OrbitGame() {
         spin: kind.spin ? (Math.random() < 0.5 ? -kind.spin : kind.spin) : 0,
         angle: Math.random() * Math.PI,
         hp: kind.hp,
-        color: kind.color,
+        // the yellow kind tracks the theme; the rest read fine on both palettes
+        color: kind === CRATER_KINDS[0] ? s.yellowColor : kind.color,
         glow: kind.glow,
       });
     };
@@ -307,7 +325,7 @@ export function OrbitGame() {
       for (const b of s.bullets) {
         ctx.beginPath();
         ctx.arc(b.x, b.y, 2.4, 0, Math.PI * 2);
-        ctx.fillStyle = "#e8c77a";
+        ctx.fillStyle = s.bulletColor;
         ctx.fill();
       }
 
