@@ -487,6 +487,78 @@ body.hover-link .cursor-dot {
   color: var(--muted-2);
 }
 
+.contact-network {
+  position: relative;
+  min-height: min(58vh, 560px);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: rgb(15 15 21 / 38%);
+}
+
+.contact-network-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.contact-network-lines line {
+  stroke: rgb(255 84 54 / 38%);
+  stroke-width: 0.18;
+  vector-effect: non-scaling-stroke;
+}
+
+.contact-node {
+  position: absolute;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 118px;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--line);
+  background: var(--ink-2);
+  padding: 11px 13px;
+  color: var(--text);
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  transition:
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.contact-node:hover {
+  transform: translate(-50%, -50%) scale(1.04);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.contact-node-icon {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgb(255 84 54 / 45%);
+  color: var(--accent);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.contact-node-icon svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+
 .contrib-graph {
   display: grid;
   min-width: 1120px;

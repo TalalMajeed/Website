@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { ContactNetwork } from "@/components/ui/network";
 
 const skillRows = [
   [
@@ -149,8 +150,8 @@ export default function Home() {
         <div className="hero-glow" />
         <div className="hero-glow b" />
 
-        <h1 className="hero-headline mb-10 [font-family:var(--display)] text-[clamp(50px,9.6vw,146px)] font-medium leading-[0.9] tracking-[-0.05em]">
-          <span className="line">
+        <h1 className="hero-headline mb-10 [font-family:var(--display)] text-[clamp(72px,9.6vw,146px)] font-medium leading-[0.9] tracking-[-0.05em] max-[520px]:text-[clamp(56px,14.5vw,82px)]">
+          <span className="line whitespace-nowrap">
             <span className="line-inner">
               Talal{" "}
               <span className="accent">Majeed</span>
@@ -158,7 +159,7 @@ export default function Home() {
           </span>
           <span className="line leading-[0.82]">
             <span className="line-inner">
-              <span className="quiet text-[0.46em] font-light leading-[0.95] text-[var(--muted)]">
+              <span className="quiet text-[0.46em] font-light leading-[0.95] text-[var(--muted)] max-[520px]:text-[0.58em]">
                 Software Developer
               </span>
             </span>
@@ -286,7 +287,8 @@ export default function Home() {
             <div className={`skills-track ${index === 1 ? "reverse fast" : ""}`}>
               {[...row, ...row].map((skill, skillIndex) => (
                 <div
-                  className="skill border border-[var(--line)] bg-[var(--ink-2)] px-[22px] py-3.5 [font-family:var(--mono)] text-sm tracking-[0.01em] text-[var(--text)] transition-all duration-300"
+                  className="skill cursor-pointer border border-[var(--line)] bg-[var(--ink-2)] px-[22px] py-3.5 [font-family:var(--mono)] text-sm tracking-[0.01em] text-[var(--text)] transition-all duration-300"
+                  data-link
                   key={`${skill}-${skillIndex}`}
                 >
                   {skill}
@@ -362,7 +364,7 @@ export default function Home() {
           <span>04 - Case Studies</span>
         </div>
         <h2 className={sectionTitleClass}>
-          Three things I&apos;ve <span className="accent">built recently.</span>
+          Some things I&apos;ve <span className="accent">built recently.</span>
         </h2>
 
         <div className="case-grid grid grid-cols-6 gap-6">
@@ -453,51 +455,56 @@ export default function Home() {
         id="contact"
         className={`${sectionBase} contact py-[clamp(80px,12vh,160px)] text-left`}
       >
-        <div className={eyebrowClass}>
-          <span>06 - Contact</span>
-        </div>
-        <h1 className="contact-headline reveal mb-[50px] [font-family:var(--display)] text-[clamp(40px,6.8vw,96px)] font-medium leading-[0.98] tracking-[-0.04em]">
-          Have something <br /><span className="accent">worth building?</span>
-          <br />
-          <span className="quiet font-light text-[var(--muted-2)]">
-            Let&apos;s talk.
-          </span>
-        </h1>
+        <div className="contact-layout grid items-center gap-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(420px,0.95fr)]">
+          <div>
+            <div className={eyebrowClass}>
+              <span>06 - Contact</span>
+            </div>
+            <h1 className="contact-headline reveal mb-[50px] [font-family:var(--display)] text-[clamp(32px,5.2vw,72px)] font-medium leading-[0.98] tracking-[-0.04em]">
+              Have something <br /><span className="accent">worth building?</span>
+              <br />
+              <span className="quiet font-light text-[var(--muted-2)]">
+                Let&apos;s talk.
+              </span>
+            </h1>
 
-        <a
-          href="mailto:m.talal.majeed@gmail.com"
-          className="contact-email reveal delay-1 mb-[60px] inline-flex items-center gap-3.5 border-b border-[var(--line)] pb-3 [font-family:var(--display)] text-[clamp(24px,3vw,40px)] font-medium tracking-[-0.02em] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
-          data-link
-        >
-          m.talal.majeed@gmail.com <span className="arrow text-[0.8em]">↗</span>
-        </a>
+            <a
+              href="mailto:m.talal.majeed@gmail.com"
+              className="contact-email reveal delay-1 mb-[60px] inline-flex items-center gap-3.5 border-b border-[var(--line)] pb-3 [font-family:var(--display)] text-[clamp(24px,3vw,40px)] font-medium tracking-[-0.02em] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+              data-link
+            >
+              m.talal.majeed@gmail.com <span className="arrow text-[0.8em]">↗</span>
+            </a>
 
-        <div className="contact-socials reveal delay-2 flex flex-wrap gap-9 [font-family:var(--mono)] text-[13px] tracking-[0.04em]">
-          <a
-            href="https://github.com/TalalMajeed"
-            target="_blank"
-            rel="noopener"
-            className="flex items-center gap-2 pb-0.5 text-[var(--muted)] transition-colors hover:text-[var(--text)]"
-            data-link
-          >
-            GitHub
-          </a>
-          <a
-            href="https://linkedin.com/in/talalmajeed"
-            target="_blank"
-            rel="noopener"
-            className="flex items-center gap-2 pb-0.5 text-[var(--muted)] transition-colors hover:text-[var(--text)]"
-            data-link
-          >
-            LinkedIn
-          </a>
-          <a
-            href="mailto:m.talal.majeed@gmail.com"
-            className="flex items-center gap-2 pb-0.5 text-[var(--muted)] transition-colors hover:text-[var(--text)]"
-            data-link
-          >
-            Email
-          </a>
+            <div className="contact-socials reveal delay-2 flex flex-wrap gap-9 [font-family:var(--mono)] text-[13px] tracking-[0.04em]">
+              <a
+                href="https://github.com/TalalMajeed"
+                target="_blank"
+                rel="noopener"
+                className="flex items-center gap-2 pb-0.5 text-[var(--muted)] transition-colors hover:text-[var(--text)]"
+                data-link
+              >
+                GitHub
+              </a>
+              <a
+                href="https://linkedin.com/in/talalmajeed"
+                target="_blank"
+                rel="noopener"
+                className="flex items-center gap-2 pb-0.5 text-[var(--muted)] transition-colors hover:text-[var(--text)]"
+                data-link
+              >
+                LinkedIn
+              </a>
+              <a
+                href="mailto:m.talal.majeed@gmail.com"
+                className="flex items-center gap-2 pb-0.5 text-[var(--muted)] transition-colors hover:text-[var(--text)]"
+                data-link
+              >
+                Email
+              </a>
+            </div>
+          </div>
+          <ContactNetwork />
         </div>
       </section>
     </>
