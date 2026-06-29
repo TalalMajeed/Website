@@ -194,6 +194,12 @@ body.hover-link .cursor-dot {
   animation-delay: 0.35s;
 }
 
+.hero-headline .line:nth-child(2) .quiet {
+  opacity: 0;
+  animation: fadeIn 1.8s ease forwards;
+  animation-delay: 0.8s;
+}
+
 .hero-sub,
 .hero-actions,
 .hero-scroll {
@@ -795,6 +801,12 @@ body.hover-link .cursor-dot {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
   }
 }
 
