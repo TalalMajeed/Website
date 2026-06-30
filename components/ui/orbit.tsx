@@ -61,6 +61,16 @@ export function OrbitGame() {
   const [score, setScore] = useState(0);
   const [best, setBest] = useState(0);
 
+  // restore the saved high score on mount
+  useEffect(() => {
+    try {
+      const saved = Number(localStorage.getItem("orbit-best"));
+      if (Number.isFinite(saved) && saved > 0) setBest(saved);
+    } catch {
+      /* ignore unavailable storage */
+    }
+  }, []);
+
   // mutable game state kept in refs so the rAF loop is stable
   const state = useRef({
     angle: -Math.PI / 2, // ship nose direction
@@ -375,6 +385,13 @@ export function OrbitGame() {
         setOver(true);
         setBest((prev) => {
           const next = Math.max(prev, s.score);
+          if (next > prev) {
+            try {
+              localStorage.setItem("orbit-best", String(next));
+            } catch {
+              /* ignore unavailable storage */
+            }
+          }
           return next;
         });
         setRunning(false);
